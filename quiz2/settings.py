@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,16 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-
+SECRET_KEY = 'k@&ox@_35&$70=3tflb!8nbp)=wht52ej6g^grv+lti82(keem'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+'''
 try:
     from .local_settings import *
 except ImportError:
     pass
-
+'''
 ALLOWED_HOSTS = ['*']
 
 
@@ -152,10 +152,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if not DEBUG:
-    SECRET_KEY = os.environ['SECRET_KEY']
-    import django_heroku 
-    django_heroku.settings(locals()) 
+#if not DEBUG:
+SECRET_KEY = os.environ['SECRET_KEY']
+import django_heroku 
+django_heroku.settings(locals()) 
 
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
